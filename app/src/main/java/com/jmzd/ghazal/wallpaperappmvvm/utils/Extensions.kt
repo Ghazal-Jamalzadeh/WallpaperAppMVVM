@@ -34,7 +34,7 @@ fun View.showSnackBar(message: String) {
     Snackbar.make(this, message, Snackbar.LENGTH_SHORT).show()
 }
 
-fun View.isVisible(isShownLoading: Boolean, container: View) {
+fun View.changeVisibility(isShownLoading: Boolean, container: View) {
     if (isShownLoading) {
         this.isVisible = true
         container.isVisible = false

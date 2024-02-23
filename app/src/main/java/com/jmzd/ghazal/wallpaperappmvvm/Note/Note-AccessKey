@@ -1,0 +1,65 @@
+Api Key---------------------------------------------------------------------------------------------
+https://unsplash.com/
+
+hamburger menu -> developers api -> your apps
+از این قسمت باید یک اپلیکیشن تعریف کنیم و api key بگیریم
+پلن رایگانش میتونه ۵۰ تا ریکوعست در ساعت را ساپورت کنه
+
+-> new application -> check all the check boxes -> accept terms
+
+-> choose a name and description (Wall App for example)
+
+Application ID:
+570824
+
+Access Key:
+-IibteGQl-PuzOi8KicV0ljFNM7CukOxRG_6awzYzaE
+
+Secret Key:
+p8G2OHjdSrQgXN_INu7imq7XbmVCUuV7pnQ9xQSBkgg
+
+Docs------------------------------------------------------------------------------------------------
+https://unsplash.com/documentation
+
+SDK----------------------------------------
+مربوط به پیکر خود سایت هست اگه خواستید استفاده کنید
+
+Users--------------------------------------
+عملیات مربوط به لاگین - لایک کردن عکس ها و ...
+
+Photos-------------------------------------
+لیست عکس ها رو میده
+اطلاعات مربوط به یک عکس
+دانلود - لایک - آنلایک و چیزای دیگه
+
+Search--------------------------------------
+موارد مربوط به سرچ
+
+Collections---------------------------------
+مربوط به کالکشن هایی که کاربرها درست کردن
+
+Topics--------------------------------------
+دسته بندی ها یا کتگوری ها
+
+Authorization-------------------------------
+https://unsplash.com/documentation#public-authentication
+
+Most actions can be performed without requiring authentication from a specific user. For example, searching, fetching, or downloading a photo does not require a user to log in.
+
+To authenticate requests in this way, pass your application’s access key via the HTTP Authorization header:
+
+Authorization: Client-ID YOUR_ACCESS_KEY
+
+You can also pass this value using a client_id query parameter:
+
+https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
+
+=> Authorization: Client-ID -IibteGQl-PuzOi8KicV0ljFNM7CukOxRG_6awzYzaE
+
+Schema---------------------------------------
+Version
+All requests receive the v1 version of the API. We encourage you to specifically request this via the Accept-Version header:
+
+Accept-Version: v1
+
+توصیه میشه که هدر بالا رو هم توی هدر قرار بدیم
