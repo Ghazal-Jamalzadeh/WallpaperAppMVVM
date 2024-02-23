@@ -4,10 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jmzd.ghazal.wallpaperappmvvm.BuildConfig
 import com.jmzd.ghazal.wallpaperappmvvm.data.network.ApiServices
-import com.jmzd.ghazal.wallpaperappmvvm.utils.BASE_URL
-import com.jmzd.ghazal.wallpaperappmvvm.utils.CONNECTION_TIME
-import com.jmzd.ghazal.wallpaperappmvvm.utils.NAMED_PING
-import com.jmzd.ghazal.wallpaperappmvvm.utils.PING_INTERVAL
+import com.jmzd.ghazal.wallpaperappmvvm.utils.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,14 +44,14 @@ object NetworkModule {
         timeout: Long, @Named(NAMED_PING) ping: Long, interceptor: HttpLoggingInterceptor
     ) = OkHttpClient.Builder()
 
-//        .addInterceptor { chain ->
-//            chain.proceed(chain.request().newBuilder().also {
-//                it.addHeader(AUTHORIZATION, "$CLIENT_ID $API_KEY")
-//                it.addHeader(ACCEPT_VERSION, V1)
-//            }.build())
-//        }.also { client ->
-//            client.addInterceptor(interceptor)
-//        }
+        .addInterceptor { chain ->
+            chain.proceed(chain.request().newBuilder().also {
+                it.addHeader(AUTHORIZATION, "$CLIENT_ID $API_KEY")
+                it.addHeader(ACCEPT_VERSION, V1)
+            }.build())
+        }.also { client ->
+            client.addInterceptor(interceptor)
+        }
         .writeTimeout(timeout, TimeUnit.SECONDS)
         .readTimeout(timeout, TimeUnit.SECONDS)
         .connectTimeout(timeout, TimeUnit.SECONDS)
