@@ -95,6 +95,9 @@ TextInputLayout end icon--------------------------------------------------------
 برای حل این مشکل از کد زیر استفاده کنید
 app:endIconMode="custom"
 
+همچنین برای دسترسی به کلیک این آیکون از کد زیر استفاده میکنیم
+setEndIconOnClickListener
+
     <!--Search-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchInpLay"

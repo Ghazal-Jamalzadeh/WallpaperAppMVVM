@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jmzd.ghazal.wallpaperappmvvm.R
 import com.jmzd.ghazal.wallpaperappmvvm.data.model.home.ResponsePhotos.ResponsePhotosItem
 import com.jmzd.ghazal.wallpaperappmvvm.data.model.home.ResponseTopics
 import com.jmzd.ghazal.wallpaperappmvvm.databinding.FragmentHomeBinding
@@ -46,6 +47,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         //Set color for status bar icons
         requireActivity().setStatusBarIconsColor(true)
+
+        //InitViews
+        binding.apply {
+            searchInpLay.setEndIconOnClickListener {
+                val search = searchEdt.text.toString()
+                if (search.isNotEmpty()) {
+//                    val direction = HomeFragmentDirections.actionToSearch(search)
+//                    findNavController().navigate(direction)
+                } else {
+                    root.showSnackBar(getString(R.string.searchCanNotBeEmpty))
+                }
+            }
+        }
+
         //color tones
         initColorsRecycler()
         //observers
