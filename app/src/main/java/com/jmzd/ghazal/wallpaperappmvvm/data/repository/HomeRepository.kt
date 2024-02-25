@@ -5,4 +5,5 @@ import javax.inject.Inject
 
 class HomeRepository @Inject constructor(private val api : ApiServices) {
     suspend fun getNewestPhotos() = api.getNewestPhotos()
+    suspend fun getTopics() = api.getTopics()
 }
