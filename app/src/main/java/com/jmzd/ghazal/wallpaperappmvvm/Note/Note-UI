@@ -122,3 +122,7 @@ app:endIconMode="custom"
             android:textColorHint="@color/gainsBoro" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+Grid vs Staggered-----------------------------------------------------------------------------------
+گرید با اندازه های یکسان میچینه میاد پایین
+استگرد ارتفاع متغیر داره و هر چقدر باشه به همون اندازه میچینه
