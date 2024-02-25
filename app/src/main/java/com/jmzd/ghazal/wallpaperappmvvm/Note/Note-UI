@@ -67,3 +67,10 @@ Transparent Status bar----------------------------------------------------------
             }
         }
 
+KenBurnsView----------------------------------------------------------------------------------------
+برای ایجاد حالت زوم این و زوم اوت توی تصاویر
+فکر کنم توی فود اپ هم ازش استفاده کرده بودیم
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/animateBgImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
