@@ -58,3 +58,22 @@ ids	Limit to only matching topic ids or slugs. (Optional; Comma separated string
 page	Page number to retrieve. (Optional; default: 1)
 per_page	Number of items per page. (Optional; default: 10)
 order_by	How to sort the topics. (Optional; Valid values: featured, latest, oldest, position; default: position)
+
+Search Photos---------------------------------------------------------------------------------------
+برای جستجو بر اساس رنگ در صفحه هوم هم از این api استفاده میکنیم
+
+
+Parameters
+param	Description
+query	Search terms.
+page	Page number to retrieve. (Optional; default: 1)
+per_page	Number of items per page. (Optional; default: 10)
+order_by	How to sort the photos. (Optional; default: relevant). Valid values are latest and relevant.
+collections	Collection ID(‘s) to narrow search. Optional. If multiple, comma-separated.
+content_filter	Limit results by content safety. (Optional; default: low). Valid values are low and high.
+color	Filter results by color. Optional. Valid values are: black_and_white, black, white, yellow, orange, red, purple, magenta, green, teal, and blue.
+orientation	Filter by photo orientation. Optional. (Valid values: landscape, portrait, squarish)
+Beta parameters (for access to beta parameters, email api@unsplash.com with your application ID):
+
+param	Description
+lang	Supported ISO 639-1 language code of the query. Optional, default: "en"
