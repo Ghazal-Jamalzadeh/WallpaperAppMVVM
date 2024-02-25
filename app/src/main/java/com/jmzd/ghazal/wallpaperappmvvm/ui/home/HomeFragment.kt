@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.wallpaperappmvvm.data.model.home.ResponsePhotos.ResponsePhotosItem
+import com.jmzd.ghazal.wallpaperappmvvm.data.model.home.ResponseTopics
 import com.jmzd.ghazal.wallpaperappmvvm.databinding.FragmentHomeBinding
 import com.jmzd.ghazal.wallpaperappmvvm.ui.home.adapters.NewestPhotosAdapter
+import com.jmzd.ghazal.wallpaperappmvvm.ui.home.adapters.TopicsAdapter
 import com.jmzd.ghazal.wallpaperappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.wallpaperappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.wallpaperappmvvm.utils.setStatusBarIconsColor
@@ -31,12 +34,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     @Inject
     lateinit var newestPhotosAdapter: NewestPhotosAdapter
 
+    @Inject
+    lateinit var topicsAdapter: TopicsAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Set color for status bar icons
         requireActivity().setStatusBarIconsColor(true)
-        //call api
-        viewModel.getNewestPhotos()
         //observers
         loadNewestPhotosLiveData()
     }
@@ -68,6 +72,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    private fun loadTopicsLiveData() {
+        binding.apply {
+            viewModel.topicsLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is NetworkRequest.Loading -> {
+                        newestList.showShimmer()
+                    }
+
+                    is NetworkRequest.Success -> {
+                        newestList.hideShimmer()
+                        response.data?.let { data ->
+                            if (data.isNotEmpty()) {
+                                initTopicsRecycler(data)
+                            }
+                        }
+                    }
+
+                    is NetworkRequest.Error -> {
+                        newestList.hideShimmer()
+                        root.showSnackBar(response.error!!)
+                    }
+                }
+            }
+        }
+    }
+
     //--- recycler views ---//
     private fun initNewestRecycler(list: List<ResponsePhotosItem>) {
         newestPhotosAdapter.setData(list)
@@ -76,6 +106,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         //Click
         newestPhotosAdapter.setOnItemClickListener {
 //            val direction = HomeFragmentDirections.actionToDetail(it)
+//            findNavController().navigate(direction)
+        }
+    }
+
+    private fun initTopicsRecycler(list: List<ResponseTopics.ResponseTopicsItem>) {
+        topicsAdapter.setData(list)
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.categoriesList.setupRecyclerview(layoutManager, topicsAdapter)
+        //Click
+        topicsAdapter.setOnItemClickListener { id, title ->
+//            val direction = HomeFragmentDirections.actionToCategories(id, title)
 //            findNavController().navigate(direction)
         }
     }
