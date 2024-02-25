@@ -35,5 +35,17 @@ regular :
 small , thumb , ... :
 خیلی کوچیکن
 
+List Photos-----------------------------------------------------------------------------------------
+https://unsplash.com/documentation#list-photos
+توی صفحه هوم برای جدید ترین ها از این api استفاده میکنیم
+پیجینیشن داره ولی ما استفاده نمیکنیم
+صرفا ده تا نیاز داریم
+توی صفحه دسته بندی ها از پیجینگش هم استفاده میکنیم
+
+Parameters
+param	Description
+page	Page number to retrieve. (Optional; default: 1)
+per_page	Number of items per page. (Optional; default: 10)
+order_by	How to sort the photos. Optional. (Valid values: latest, oldest, popular; default: latest)
 
 
