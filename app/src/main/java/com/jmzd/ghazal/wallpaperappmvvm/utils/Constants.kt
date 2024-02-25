@@ -14,3 +14,6 @@ const val AUTHORIZATION = "Authorization"
 const val CLIENT_ID = "Client-ID"
 const val ACCEPT_VERSION = "Accept-Version"
 const val V1 = "v1"
+
+//other
+const val SPLASH_DELAY = 3500L
