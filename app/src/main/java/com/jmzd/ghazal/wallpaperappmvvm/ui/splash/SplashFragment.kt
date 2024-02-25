@@ -57,7 +57,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
                             lifecycleScope.launch {
                                 delay(SPLASH_DELAY)
                                 findNavController().popBackStack(R.id.splashFragment, true)
-//                                findNavController().navigate(R.id.actionToHome)
+                                findNavController().navigate(R.id.action_to_homeFragment)
                             }
                         }
                     }
