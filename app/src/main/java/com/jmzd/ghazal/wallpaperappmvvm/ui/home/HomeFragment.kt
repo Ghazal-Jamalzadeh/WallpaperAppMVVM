@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.wallpaperappmvvm.data.model.home.ResponsePhotos.ResponsePhotosItem
 import com.jmzd.ghazal.wallpaperappmvvm.data.model.home.ResponseTopics
 import com.jmzd.ghazal.wallpaperappmvvm.databinding.FragmentHomeBinding
+import com.jmzd.ghazal.wallpaperappmvvm.ui.home.adapters.ColorsAdapter
 import com.jmzd.ghazal.wallpaperappmvvm.ui.home.adapters.NewestPhotosAdapter
 import com.jmzd.ghazal.wallpaperappmvvm.ui.home.adapters.TopicsAdapter
 import com.jmzd.ghazal.wallpaperappmvvm.utils.base.BaseFragment
@@ -37,12 +38,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     @Inject
     lateinit var topicsAdapter: TopicsAdapter
 
+    @Inject
+    lateinit var colorsAdapter: ColorsAdapter
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Set color for status bar icons
         requireActivity().setStatusBarIconsColor(true)
+        //color tones
+        initColorsRecycler()
         //observers
         loadNewestPhotosLiveData()
+        loadTopicsLiveData()
     }
 
     //--- observers ---//
@@ -117,6 +125,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         //Click
         topicsAdapter.setOnItemClickListener { id, title ->
 //            val direction = HomeFragmentDirections.actionToCategories(id, title)
+//            findNavController().navigate(direction)
+        }
+    }
+
+    private fun initColorsRecycler() {
+        colorsAdapter.setData(viewModel.getColorTones())
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.colorToneList.setupRecyclerview(layoutManager, colorsAdapter)
+        //Click
+        colorsAdapter.setOnItemClickListener {
+//            val direction = HomeFragmentDirections.actionToSearch(it)
 //            findNavController().navigate(direction)
         }
     }
