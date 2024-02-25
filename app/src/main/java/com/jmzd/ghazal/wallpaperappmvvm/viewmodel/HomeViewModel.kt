@@ -51,4 +51,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
 
         _topicsLiveData.value = NetworkResponse(response).generateResponse()
     }
+
+    //--- other methods ---//
+    fun getColorTones() = repository.getColorTones()
 }
