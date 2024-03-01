@@ -51,3 +51,13 @@ Paging source-------------------------------------------------------------------
             LoadResult.Error(e)
         }
     }
+
+Repository------------------------------------------------------------------------------------------
+کد مربوط به این قسمت توی فصل یک داخل ویومدل نوشته شده بود و فرق داشت از نظر آپشن ها
+و به صورت فلو استفاده میکردیم
+اینجا به لایو دیتا تبدیل میکنیم
+
+    fun categoryPhotos(id: String) = Pager(
+        config = PagingConfig(pageSize = 20, maxSize = 100, enablePlaceholders = false),
+        pagingSourceFactory = { CategoriesPagingSource(api, id) }
+    ).liveData
