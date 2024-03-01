@@ -15,6 +15,7 @@
     </fragment>
 
 
+    <!-- home -->
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.jmzd.ghazal.wallpaperappmvvm.ui.home.HomeFragment"
@@ -24,5 +25,19 @@
     <action
         android:id="@+id/action_to_homeFragment"
         app:destination="@id/homeFragment" />
+
+
+    <!-- categories -->
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.jmzd.ghazal.wallpaperappmvvm.ui.categories.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" />
+    <action
+        android:id="@+id/action_to_categoriesFragment"
+        app:destination="@id/categoriesFragment" />
+
+
+
 
 </navigation>
