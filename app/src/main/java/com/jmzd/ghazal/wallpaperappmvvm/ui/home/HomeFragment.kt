@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.wallpaperappmvvm.R
@@ -139,8 +140,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.categoriesList.setupRecyclerview(layoutManager, topicsAdapter)
         //Click
         topicsAdapter.setOnItemClickListener { id, title ->
-//            val direction = HomeFragmentDirections.actionToCategories(id, title)
-//            findNavController().navigate(direction)
+            val direction = HomeFragmentDirections.actionToCategoriesFragment(id, title)
+            findNavController().navigate(direction)
         }
     }
 

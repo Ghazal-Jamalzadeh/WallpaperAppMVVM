@@ -24,7 +24,11 @@
 
     <action
         android:id="@+id/action_to_homeFragment"
-        app:destination="@id/homeFragment" />
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
 
 
     <!-- categories -->
@@ -32,10 +36,22 @@
         android:id="@+id/categoriesFragment"
         android:name="com.jmzd.ghazal.wallpaperappmvvm.ui.categories.CategoriesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <argument
+            android:name="topic_id"
+            app:argType="string" />
+
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
     <action
         android:id="@+id/action_to_categoriesFragment"
-        app:destination="@id/categoriesFragment" />
+        app:destination="@id/categoriesFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
 
 

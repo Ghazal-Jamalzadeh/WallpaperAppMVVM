@@ -77,3 +77,18 @@ Beta parameters (for access to beta parameters, email api@unsplash.com with your
 
 param	Description
 lang	Supported ISO 639-1 language code of the query. Optional, default: "en"
+
+Get A Topic Photos----------------------------------------------------------------------------------
+Get a topic’s photos
+Retrieve a topic’s photos.
+
+GET /topics/:id_or_slug/photos
+Note: See the note on hotlinking.
+
+Parameters
+param	Description
+id_or_slug	The topics’s ID or slug. Required.
+page	Page number to retrieve. (Optional; default: 1)
+per_page	Number of items per page. (Optional; default: 10)
+orientation	Filter by photo orientation. (Optional; Valid values: landscape, portrait, squarish)
+order_by	How to sort the photos. (Optional; Valid values: latest, oldest, popular; default: latest)
