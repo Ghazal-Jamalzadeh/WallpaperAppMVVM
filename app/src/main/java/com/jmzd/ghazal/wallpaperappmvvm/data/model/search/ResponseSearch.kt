@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseSearch(
     @SerializedName("results")
-    val results: List<Result?>?,
+    val results: List<Result>?,
     @SerializedName("total")
     val total: Int?, // 10000
     @SerializedName("total_pages")
