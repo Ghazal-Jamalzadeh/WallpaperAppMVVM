@@ -257,3 +257,34 @@ Handle states in fragment-------------------------------------------------------
             }
         }
     }
+
+توی فرگمنت سرچ این حالت کامل تر هندل شده و وضعیت امپتی رو هم هندل کردیم
+چندین شرط باید چک شه برای این حالت
+
+1- state.source.refresh is LoadState.NotLoading
+در حالت لودینگ نباشه اداپتر
+
+2- state.append.endOfPaginationReached
+پیجینگ به انتها رسیده و چیزی برای اضافه کردن نداره
+
+3- searchAdapter.itemCount < 1
+تعداد آیتم ها از یک کمتر بود یعنی صفر
+
+    private fun loadDataStates() {
+        searchAdapter.addLoadStateListener { state ->
+            binding.apply {
+                loading.isVisible = state.source.refresh is LoadState.Loading
+                searchList.isVisible = state.source.refresh is LoadState.NotLoading
+                //Empty
+                if (state.source.refresh is LoadState.NotLoading &&
+                    state.append.endOfPaginationReached && searchAdapter.itemCount < 1
+                ) {
+                    emptyLay.isVisible = true
+                    searchList.isVisible = false
+                } else {
+                    emptyLay.isVisible = false
+                    searchList.isVisible = true
+                }
+            }
+        }
+    }
