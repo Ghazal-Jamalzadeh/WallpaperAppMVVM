@@ -151,8 +151,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.colorToneList.setupRecyclerview(layoutManager, colorsAdapter)
         //Click
         colorsAdapter.setOnItemClickListener {
-//            val direction = HomeFragmentDirections.actionToSearch(it)
-//            findNavController().navigate(direction)
+            val direction = HomeFragmentDirections.actionToSearchFragment(it)
+            findNavController().navigate(direction)
         }
     }
 
