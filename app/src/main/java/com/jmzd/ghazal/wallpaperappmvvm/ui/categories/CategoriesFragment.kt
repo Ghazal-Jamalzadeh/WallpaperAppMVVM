@@ -58,7 +58,7 @@ class CategoriesFragment : BaseFragment<FragmentCategoriesBinding>() {
         }
         //load data
         loadData()
-        //init recycler
+        loadDataStates()
         initRecyclerView()
 
     }
