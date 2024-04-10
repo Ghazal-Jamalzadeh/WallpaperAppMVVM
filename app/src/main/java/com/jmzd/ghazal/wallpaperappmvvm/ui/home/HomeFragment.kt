@@ -54,8 +54,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             searchInpLay.setEndIconOnClickListener {
                 val search = searchEdt.text.toString()
                 if (search.isNotEmpty()) {
-//                    val direction = HomeFragmentDirections.actionToSearch(search)
-//                    findNavController().navigate(direction)
+                    val direction = HomeFragmentDirections.actionToSearchFragment(search)
+                    findNavController().navigate(direction)
                 } else {
                     root.showSnackBar(getString(R.string.searchCanNotBeEmpty))
                 }
