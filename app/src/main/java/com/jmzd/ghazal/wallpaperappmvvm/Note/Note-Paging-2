@@ -154,7 +154,7 @@ class CategoriesViewModel @Inject constructor(private val repository: Categories
          currentData.value = id
      }
 
-Fragment--------------------------------------------------------------------------------------------
+Fragment (call api)---------------------------------------------------------------------------------
 *************** نکته خیلی مهم درباره لایف سایکل****************
 اگه من کدی دارم که میخوام یک بار اجرا شه مثلا کال کردن یک سرویس
 یک راهش اینه که ببرم توی بلاک اینیت ویو مدل بنویسم
@@ -207,3 +207,53 @@ Adapter-------------------------------------------------------------------------
 و لایه سنگین نیست
 سنگین یعنی مثلا پلی کردن ویدیو سنگین یا ایف و الس های زیاد
  holder.setIsRecyclable(false)
+
+Fragment (set adapter)------------------------------------------------------------------------------
+توی آداپترهای معمولی میومدیم از حالت دست دیتا استفاده میکردیم
+توی این آداپتر خاص ولی به این شکل مینوسیم برای ست کردن دیتا داخل اداپتر
+ورودی اول لایف سایکل
+ورودی دوم اطلاعات
+    private fun loadData() {
+        viewModel.categoriesPhotos.observe(viewLifecycleOwner) {
+            categoriesAdapter.submitData(lifecycle, it)
+        }
+    }
+
+Fragment (init recycler)----------------------------------------------------------------------------
+از اون اکستنشن فانکشنی که قبلا نوشتیم نمیتونیم استفاده کنیم توی اینجا
+چون آداپتری که داریم خاص هست و مخصوص پیجینگ هست
+
+قبلا میومدیم آداپتر رو به این شکل روی ریسایکلر ویو ست میکردیم
+adapter = categoriesAdapter
+
+الان هم میتونیم همین کارو کنیم
+ولی میخوایم اون آداپتر ارور و لودینگ پیجینگ رو هم روش ست کنیم
+پس یکم متفاوت میشه
+
+withLoadStateFooter
+withLoadStateHeader -> masalan baraye application haye chat
+withLoadStateHeaderAndFooter -> mishe hata ba zaher haye mokhtalef tarif kard barash
+
+ورودیش هم یک آداپتریه که از loadStateAdapter ارث بری کرده
+توی این آداپتر اون لودینگه و ارور و این ها هندل میشه
+همون طور که توی فصل یک گفتیم یک دونه از این آداپتر برای کل پیجینگ های پروژه کافی هست
+
+adapter = categoriesAdapter.withLoadStateFooter(LoadMoreAdapter { categoriesAdapter.retry() })
+
+آداپتری که از پیجینگ ارث بری میکنه دو تا متد داره
+refresh -> az aval load mikone
+retry -> az page current load mikone dobare
+
+Handle states in fragment---------------------------------------------------------------------------
+کلا این آداپتر پیج اینیشن قابلیت های خیلی زیاد و باحالی رو بهمون میده
+یکی دیگه از این قابلیت های باحال همین متد addLoadStateListener هست
+تو حالت عادی هندل کردن این حالت ها چالش های زیادی داره
+
+    private fun loadDataStates() {
+        categoriesAdapter.addLoadStateListener { state ->
+            binding.apply {
+                loading.isVisible = state.source.refresh is LoadState.Loading
+                categoriesList.isVisible = state.source.refresh is LoadState.NotLoading
+            }
+        }
+    }
