@@ -114,3 +114,13 @@ Beta parameters (for access to beta parameters, email api@unsplash.com with your
 param	Description
 lang	Supported ISO 639-1 language code of the query. Optional, default: "en"
 
+Get A Photo-----------------------------------------------------------------------------------------
+Get a photo
+Retrieve a single photo.
+
+GET /photos/:id
+Note: See the note on hotlinking.
+
+Parameters
+param	Description
+id	The photo’s ID. Required.
