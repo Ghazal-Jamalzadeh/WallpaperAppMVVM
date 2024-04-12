@@ -34,10 +34,12 @@ import com.jmzd.ghazal.wallpaperappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.wallpaperappmvvm.utils.setStatusBarIconsColor
 import com.jmzd.ghazal.wallpaperappmvvm.utils.showSnackBar
 import com.jmzd.ghazal.wallpaperappmvvm.viewmodel.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 
+@AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
     //binding
@@ -64,6 +66,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
         //Args
         args.let {
             //Call api
+            if(isNetworkAvailable)
             viewModel.getDetailPhoto(it.id)
         }
 
