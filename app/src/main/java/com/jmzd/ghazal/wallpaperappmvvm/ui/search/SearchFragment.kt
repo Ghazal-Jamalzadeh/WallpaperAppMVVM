@@ -80,8 +80,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
         //Click
         searchAdapter.setOnItemClickListener {
-//            val direction = SearchFragmentDirections.actionToDetail(it)
-//            findNavController().navigate(direction)
+            val direction = SearchFragmentDirections.actionToDetailFragment(it)
+            findNavController().navigate(direction)
         }
     }
 

@@ -129,8 +129,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.newestList.setupRecyclerview(layoutManager, newestPhotosAdapter)
         //Click
         newestPhotosAdapter.setOnItemClickListener {
-//            val direction = HomeFragmentDirections.actionToDetail(it)
-//            findNavController().navigate(direction)
+            val direction = HomeFragmentDirections.actionToDetailFragment(it)
+            findNavController().navigate(direction)
         }
     }
 

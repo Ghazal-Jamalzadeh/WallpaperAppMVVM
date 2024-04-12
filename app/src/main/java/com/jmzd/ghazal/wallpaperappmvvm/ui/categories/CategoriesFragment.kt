@@ -76,8 +76,8 @@ class CategoriesFragment : BaseFragment<FragmentCategoriesBinding>() {
         }
        // Click
         categoriesAdapter.setOnItemClickListener {
-//            val direction = CategoriesFragmentDirections.actionToDetail(it)
-//            findNavController().navigate(direction)
+            val direction = CategoriesFragmentDirections.actionToDetailFragment(it)
+            findNavController().navigate(direction)
         }
     }
 
