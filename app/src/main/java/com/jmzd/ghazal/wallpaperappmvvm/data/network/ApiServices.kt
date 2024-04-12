@@ -1,5 +1,6 @@
 package com.jmzd.ghazal.wallpaperappmvvm.data.network
 
+import com.jmzd.ghazal.wallpaperappmvvm.data.model.detail.ResponseDetail
 import com.jmzd.ghazal.wallpaperappmvvm.data.model.home.ResponsePhotos
 import com.jmzd.ghazal.wallpaperappmvvm.data.model.home.ResponseTopics
 import com.jmzd.ghazal.wallpaperappmvvm.data.model.search.ResponseSearch
@@ -25,4 +26,7 @@ interface ApiServices {
 
     @GET("search/photos")
     suspend fun searchPhotos(@Query("query") query : String , @Query("page") page : Int) : Response<ResponseSearch>
+
+    @GET("photos/{id}")
+    suspend fun getDetailPhoto(@Path("id") id : String) : Response<ResponseDetail>
 }
