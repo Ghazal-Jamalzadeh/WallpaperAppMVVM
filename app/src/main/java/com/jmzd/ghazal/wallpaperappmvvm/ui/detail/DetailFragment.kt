@@ -8,7 +8,10 @@ import androidx.navigation.fragment.navArgs
 import com.jmzd.ghazal.wallpaperappmvvm.databinding.FragmentDetailBinding
 import com.jmzd.ghazal.wallpaperappmvvm.ui.search.SearchFragmentArgs
 import com.jmzd.ghazal.wallpaperappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.wallpaperappmvvm.utils.changeVisibility
+import com.jmzd.ghazal.wallpaperappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.wallpaperappmvvm.utils.setStatusBarIconsColor
+import com.jmzd.ghazal.wallpaperappmvvm.utils.showSnackBar
 import com.jmzd.ghazal.wallpaperappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.wallpaperappmvvm.viewmodel.SearchViewModel
 
@@ -34,7 +37,54 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
             viewModel.getDetailPhoto(it.id)
         }
 
+        loadData()
+
     }
+
+
+    private fun loadData() {
+        binding.apply {
+            viewModel.detailLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is NetworkRequest.Loading -> {
+                        loading.changeVisibility(true, container)
+                    }
+
+                    is NetworkRequest.Success -> {
+//                        response.data?.let { data ->
+//                            //Init rotate view
+//                            initRotateView(data.urls?.regular!!)
+//                            activeRotateView()
+//                            //Set wallpaper
+//                            setWallpaperImg.setOnClickListener {
+//                                wallpaperManager.setBitmap(imageBitmap)
+//                                setWallpaperImg.setImageResource(R.drawable.check)
+//                            }
+//                            //Download
+//                            downloadLay.setOnClickListener {
+//                                requestPermission()
+//                                data.urls.full?.let {
+//                                    downloadImage(it, data.slug!!)
+//                                }
+//                            }
+//                            //Info
+//                            infoImg.setOnClickListener {
+//                                val direction = DetailFragmentDirections.actionDetailToInfo(data)
+//                                findNavController().navigate(direction)
+//                            }
+//                        }
+                    }
+
+                    is NetworkRequest.Error -> {
+                        loading.changeVisibility(false, container)
+                        root.showSnackBar(response.error!!)
+                    }
+                }
+            }
+        }
+    }
+
+
 
 
 }
