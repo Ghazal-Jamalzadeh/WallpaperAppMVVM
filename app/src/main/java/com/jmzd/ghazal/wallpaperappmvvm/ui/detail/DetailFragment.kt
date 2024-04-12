@@ -1,6 +1,7 @@
 package com.jmzd.ghazal.wallpaperappmvvm.ui.detail
 
 import academy.nouri.rotateview.RotateView
+import android.Manifest
 import android.app.WallpaperManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -25,6 +26,7 @@ import com.jmzd.ghazal.wallpaperappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.wallpaperappmvvm.viewmodel.SearchViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.innfinity.permissionflow.lib.requestPermissions
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
@@ -84,12 +86,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                                 setWallpaperImg.setImageResource(R.drawable.check)
                             }
 //                            //Download
-//                            downloadLay.setOnClickListener {
-//                                requestPermission()
-//                                data.urls.full?.let {
+                            downloadLay.setOnClickListener {
+                                requestPermission()
+                                data.urls.full?.let {
 //                                    downloadImage(it, data.slug!!)
-//                                }
-//                            }
+                                }
+                            }
 //                            //Info
 //                            infoImg.setOnClickListener {
 //                                val direction = DetailFragmentDirections.actionDetailToInfo(data)
@@ -155,6 +157,11 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
     }
 
 
+    private fun requestPermission() {
+        lifecycleScope.launch {
+            requestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE).collect {}
+        }
+    }
 
 
 }
