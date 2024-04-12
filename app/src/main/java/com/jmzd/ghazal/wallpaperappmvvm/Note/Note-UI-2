@@ -129,3 +129,40 @@ setEndIconOnClickListener
 Grid vs Staggered-----------------------------------------------------------------------------------
 گرید با اندازه های یکسان میچینه میاد پایین
 استگرد ارتفاع متغیر داره و هر چقدر باشه به همون اندازه میچینه
+
+Show Wallpaper using phone sensors------------------------------------------------------------------
+میخوایم وقتی کاربر گوشی رو تکون میده عکس ما هم در جهت افقی تکون بخوره
+به این منظور و برای اینکه فیکس نباشه
+میندازیم داخل یک اسکرول ویوی هوریزنتال و بعد هندلش میکنیم
+و به واسطه کتابخونه داینامیک سایز هندلش میکنیم
+        <!--Image-->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <ImageView
+                android:id="@+id/coverImg"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </HorizontalScrollView>
+
+CircularProgressIndicator---------------------------------------------------------------------------
+     <!--Progress-->
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/downloadLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mines3mdp"
+                    android:visibility="gone"
+                    app:indicatorColor="@color/white"
+                    app:indicatorSize="@dimen/_40mdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:trackColor="@android:color/transparent"
+                    با اتریبیوت بالا یک افکت خیلی جالب پیدا میکنه
+                    app:trackCornerRadius="@dimen/_5mdp"
+                    app:trackThickness="@dimen/_2mdp" />
