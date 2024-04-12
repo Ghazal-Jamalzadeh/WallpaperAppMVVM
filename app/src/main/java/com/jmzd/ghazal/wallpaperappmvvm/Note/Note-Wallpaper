@@ -19,7 +19,7 @@ its a normal permission
                                 setWallpaperImg.setImageResource(R.drawable.check)
                             }
 
-3- bitmap
+3- bitmap : convert URL to bitmap & set to Nouri rotateView
 والپیپر منیجر به کمک بیت مپ این کار رو انجام میده
 بیت مپ تصاویری هستن که توی اندروید وجود دارن
 و تمامی تصاویر به واسطه بیت مپ هست که ساخته میشن و نشون داده میشن
@@ -30,3 +30,77 @@ its a normal permission
 استفاده نکنید
 از همون کویل استفاده کنید
 و url هم به بیت مپ تبدیل میکنه
+البته پیکاسو هم میتونست تبدیل به بیت مپ کنه عکسا رو
+ولی کویل این کارو با کیفیت خیلی بالاتری انجام میده
+برای این کار یک فانکشن مینویسیم
+
+ImageLoader :
+مربوط به کویل هست ونیاز به کانتکس دارد
+
+    private fun initRotateView(imageUrl: String) {
+        binding.apply {
+            lifecycleScope.launch {
+                //Create bitmap from image
+                val loader = ImageLoader(requireContext())
+                val request = ImageRequest.Builder(requireContext())
+                    // یو آر ال عکس رو اینجا بهش میدیم
+                    خودش دانلود میکنه و توی کش خودش  ذخیره میکنه
+                    .data(imageUrl)
+                    // استفاده از موارد سخت افزاری و درگیر شدن سخت افزار برای لود تصاویر سنگین
+                    .allowHardware(false)
+                    .build()
+                // در نهایت اگر ریسالت ساکسس بود بیا و درابل رو بساز
+                val result = (loader.execute(request) as SuccessResult).drawable
+                // در نهایت خیلی راحت به بیت مپ تبدیل کن
+                imageBitmap = (result as BitmapDrawable).bitmap
+                //Delay
+                // یک دیلی میندازیم که خیالمون راحت باشه که بیت مپ ساخته شده
+                delay(200)
+                //Rotate view
+                //چون هندل کردن اینستنس رتیت ویو توی لایف سلیکل فرگمنت خیلی مهمه به صورت جنرال تعریفش میکنیم
+                rotateView = RotateView.getInstance(requireContext())!!
+                rotateView.apply {
+                    setImageWithBitmap(coverImg, imageBitmap)
+                    // عکسو از وسط بیاره و بعد ادامه بده
+                    center()
+                }
+                //Hide loading
+                زمانی که همه کارامون شد لودینگ رو از بین میبریم
+                هر چی حجم عکس بیشتر باشه این فرایند تبدیل به بیت مپ بیشتر طول مبکشه
+                                چون حتی دریافت کردنش بیشتر طول میکشه
+                loading.isVisible(false, container)
+            }
+        }
+    }
+
+4- activate / de activate  rotate view
+    private fun activeRotateView() {
+        binding.apply {
+            rotateViewImg.apply {
+                setOnClickListener {
+                // سنسور دیوایس کاربر رو حتما چک کنید که داشته باشه و سالم باشه و این ها
+                    if (rotateView.isDeviceSupported()) {
+                        isEnabledRotateView = if (isEnabledRotateView.not()) {
+                            //فعال کردن روتیت ویو
+                            rotateView.registerListener()
+                            setBackgroundResource(R.drawable.bg_circle_azure_alpha_selected)
+                            true
+                        } else {
+                            rotateView.unRegisterListener()
+                            setBackgroundResource(R.drawable.bg_circle_azure_alpha)
+                            false
+                        }
+                    } else {
+                        root.showSnackBar(getString(R.string.notSupportRotateView))
+                    }
+                }
+            }
+        }
+    }
+
+5- rotate view & lifecycle
+    override fun onStop() {
+        super.onStop()
+        if (this::rotateView.isInitialized)
+            rotateView.unRegisterListener()
+    }
