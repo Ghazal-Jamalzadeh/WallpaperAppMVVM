@@ -17,3 +17,5 @@ const val V1 = "v1"
 
 //other
 const val SPLASH_DELAY = 3500L
+const val IMAGE_MIME_TYPE = "image/jpeg"
+const val JPG = "jpg"

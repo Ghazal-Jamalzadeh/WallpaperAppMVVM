@@ -148,3 +148,99 @@ download wallpaper--------------------------------------------------------------
 لازم نیست هر بار بررسی کنی که آیا کاربر من قبلا دسترسی ها رو داده یا نداده
 اگه نداده دیالوگ رو نمایش بده
 اینا رو خودش هندل میکنه برعکس کتابخونه های دیگه
+
+3- download image
+برای دانلود عکس از متدهای خود اندروید استفاده میکنیم و از هیچ کتابخانه ای استفاده نمیکنیم
+عکس به صورت خودکار وارد گالری میشه
+بعضی از کدها این کار رو نمیکنن
+و خودت باید گالری رو رفرش کنی با کد
+
+دانلود منیجیری که اینجا به کار میبریم توی استاتوس بار نشون میده درصد و این ها رو
+کتابخونه های جانبی هم برای این کار وجود داره
+مثل prDownloader
+که گالری رو باید دستی رفرش کرد توش
+
+    private fun downloadImage(imageFile: String, fileName: String) {
+
+        دانلود منیجر رو از کلاس سیستم سرویس که داخل کانتکس هس میگیریم و تبدیلش میکنیم به دانلود منیجر
+        val dm = requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+
+        برای دانلود نیاز به یو آر آی داریم
+        که با یو آر ال فرق داره
+        و یک حالت مسیر دهی هست توی اندروید
+        val downloadUri = Uri.parse(imageFile)
+
+        ایجاد ریکوعست از دانلود منیجر و یو آر آی رو میدیم بهش
+        val request = DownloadManager.Request(downloadUri)
+
+        شروع عملیات دانلود
+        مشخص میکنیم که با وای فای و دیتا دانلود رو انجام بده
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+             عنوانی که توی نوتیفیکیشن و این ها میبینه
+            .setTitle(fileName)
+            میم تایپ یعنی چه فرمتیه
+            ما image/jpeg میدیم بهش
+            .setMimeType(IMAGE_MIME_TYPE)
+            میخوان نوتیفیکیشنش رو نشون بدی
+            کامپیلیت هم شد بگو. صدا اینا بده
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            اصل کار اینه
+            کجا ذخیره کنیم؟
+            توی مسیرهای جنرال ذخیره ش میکنیم
+            چون اگه توی مسیرهای جنرال نبریم
+            اولا ممکنه مشکل آپدیت گالری پیدا کنیم
+            و برای دسترسی به فولدرهای خاص باید وارد دردسرهای اسکوپ بشم
+            پس برو توی فولدر پیکچرز اندروید
+            و خلاصه فایل رو درست کن
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, File.separator + fileName + JPG)
+
+        اینجا میگیم شروع کن دانلود رو
+        و آیدی دانلود رو هم از اینجا میگیریم که جلوتر نیاز داریم
+        downloadId = dm.enqueue(request)
+
+        پروگرس بار رو هم نشون میدیم
+        //Show progress bar
+        binding.downloadLoading.apply {
+            isVisible = true
+            حالت بی نهایت. درصد این ها نشون نده
+            isIndeterminate = true
+        }
+
+    }
+
+check if downlaod completed using broadcast receivers-----------------------------------------------
+حالا از کجا بفهمیم که دانلود تموم شده؟
+چون دانلود منیجر و این ها اون لیسنر مربوط به تمام شدن دانلود رو نمیدن
+پس باید از برادکست رسیورها استفاده کنیم
+چون باید رجسیتر شه برای گوش دادن بهش کلشو برمیگردونیم
+
+    private fun downloadImageCompleted(): BroadcastReceiver {
+        این متد معروف آن رسیو رو ایمپلمنت میکنیم
+        return object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+
+                حالا از کجا بفهمم که دانلود من تموم شده؟
+                من نیاز به یک ایدی دارم
+                که این آیدی در واقع از همون دانلود منیجر آیدی استفاده میکنه
+                و وصل میشه به آیدی دانلود منیجری که بالاتر ساختیم
+                بعد میگه هر موقع آیدی این برابر بود با اون آیدی ای که تموم شده بود بهم بگو
+
+                val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+                if (id == downloadId) {
+                    binding.apply {
+                        downloadLoading.isVisible = false
+                        downloadImg.setImageResource(R.drawable.check)
+                    }
+                }
+            }
+        }
+    }
+
+این تیکه کد رو هم توی آن کریت مینویسیم
+که رجسیتر کنیم براد کست رسیور رو
+پارامتر اولش همون برادکست رسیوری هست که ساختیم
+پارامتر دومش اینتنت یا همون اکشن مورد نظر برای تموم شدن هست
+
+        //Register download broadcast receiver
+        requireContext().registerReceiver(downloadImageCompleted(), IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
