@@ -1,0 +1,32 @@
+Set Wallpaper---------------------------------------------------------------------------------------
+کد خیلی ساده ای داره
+
+1- manifest
+add wallpaper permission
+its a normal permission
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+
+2- WallpaperManager class
+برای ست کردن والپیپر نیاز به این کلاس داریم
+میتونیم با تزریق وابستگی بیاریمش داخل صفحه
+ولی به عنوان تمرین باشه برای خودتون و با لیزی کار رو پیش میبیریم
+    private val wallpaperManager by lazy { WallpaperManager.getInstance(requireContext()) }
+راهنمایی:
+توی di به صورت ماژول تامینش کنید
+
+                            setWallpaperImg.setOnClickListener {
+                                wallpaperManager.setBitmap(imageBitmap)
+                                setWallpaperImg.setImageResource(R.drawable.check)
+                            }
+
+3- bitmap
+والپیپر منیجر به کمک بیت مپ این کار رو انجام میده
+بیت مپ تصاویری هستن که توی اندروید وجود دارن
+و تمامی تصاویر به واسطه بیت مپ هست که ساخته میشن و نشون داده میشن
+ما باید عکسی که از سرور میگیریم رو تبدیل کنیم به بیت مپ
+روش های مختلفی برای این کرا وجود داره
+ما به کمک کوبل انجامش میدیم
+یه روش قدیمی وجود داره به اسم کانکشن منیجر که روش خوبی نیست
+استفاده نکنید
+از همون کویل استفاده کنید
+و url هم به بیت مپ تبدیل میکنه

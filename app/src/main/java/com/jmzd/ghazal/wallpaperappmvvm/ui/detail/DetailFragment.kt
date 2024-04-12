@@ -1,10 +1,13 @@
 package com.jmzd.ghazal.wallpaperappmvvm.ui.detail
 
+import android.app.WallpaperManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.jmzd.ghazal.wallpaperappmvvm.R
 import com.jmzd.ghazal.wallpaperappmvvm.databinding.FragmentDetailBinding
 import com.jmzd.ghazal.wallpaperappmvvm.ui.search.SearchFragmentArgs
 import com.jmzd.ghazal.wallpaperappmvvm.utils.base.BaseFragment
@@ -26,6 +29,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
     //args
     private val args by navArgs<DetailFragmentArgs>()
+
+    //wallpaper
+    private val wallpaperManager by lazy { WallpaperManager.getInstance(requireContext()) }
+    private lateinit var imageBitmap: Bitmap
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,15 +58,15 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                     }
 
                     is NetworkRequest.Success -> {
-//                        response.data?.let { data ->
+                        response.data?.let { data ->
 //                            //Init rotate view
 //                            initRotateView(data.urls?.regular!!)
 //                            activeRotateView()
 //                            //Set wallpaper
-//                            setWallpaperImg.setOnClickListener {
+                            setWallpaperImg.setOnClickListener {
 //                                wallpaperManager.setBitmap(imageBitmap)
-//                                setWallpaperImg.setImageResource(R.drawable.check)
-//                            }
+                                setWallpaperImg.setImageResource(R.drawable.check)
+                            }
 //                            //Download
 //                            downloadLay.setOnClickListener {
 //                                requestPermission()
@@ -72,7 +79,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 //                                val direction = DetailFragmentDirections.actionDetailToInfo(data)
 //                                findNavController().navigate(direction)
 //                            }
-//                        }
+                        }
                     }
 
                     is NetworkRequest.Error -> {
