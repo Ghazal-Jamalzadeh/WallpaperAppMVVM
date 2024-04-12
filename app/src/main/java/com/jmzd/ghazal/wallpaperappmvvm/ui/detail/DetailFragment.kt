@@ -18,6 +18,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.ImageLoader
 import coil.request.ImageRequest
@@ -107,10 +108,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                                 }
                             }
 //                            //Info
-//                            infoImg.setOnClickListener {
-//                                val direction = DetailFragmentDirections.actionDetailToInfo(data)
-//                                findNavController().navigate(direction)
-//                            }
+                            infoImg.setOnClickListener {
+                                val direction = DetailFragmentDirections.actionDetailFragmentToDetailInfoFragment(data)
+                                findNavController().navigate(direction)
+                            }
                         }
                     }
 

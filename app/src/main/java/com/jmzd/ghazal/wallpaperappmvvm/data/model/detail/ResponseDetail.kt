@@ -1,31 +1,35 @@
 package com.jmzd.ghazal.wallpaperappmvvm.data.model.detail
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class ResponseDetail(
     @SerializedName("alt_description")
     val altDescription: String?, // a room with a sign that says you'll think of something
     @SerializedName("alternative_slugs")
-    val alternativeSlugs: AlternativeSlugs?,
+    val alternativeSlugs: @RawValue AlternativeSlugs?,
     @SerializedName("asset_type")
     val assetType: String?, // photo
     @SerializedName("blur_hash")
     val blurHash: String?, // LEF5~o-T4nD%~qIUt6t74TIoog%M
     @SerializedName("breadcrumbs")
-    val breadcrumbs: List<Any?>?,
+    val breadcrumbs: @RawValue List<Any?>?,
     @SerializedName("color")
     val color: String?, // #262626
     @SerializedName("created_at")
     val createdAt: String?, // 2024-04-09T21:34:10Z
     @SerializedName("current_user_collections")
-    val currentUserCollections: List<Any?>?,
+    val currentUserCollections: @RawValue List<Any?>?,
     @SerializedName("description")
-    val description: Any?, // null
+    val description: @RawValue Any?, // null
     @SerializedName("downloads")
     val downloads: Int?, // 2970
     @SerializedName("exif")
-    val exif: Exif?,
+    val exif: @RawValue Exif?,
     @SerializedName("height")
     val height: Int?, // 3601
     @SerializedName("id")
@@ -35,40 +39,40 @@ data class ResponseDetail(
     @SerializedName("likes")
     val likes: Int?, // 118
     @SerializedName("links")
-    val links: Links?,
+    val links: @RawValue Links?,
     @SerializedName("location")
-    val location: Location?,
+    val location: @RawValue Location?,
     @SerializedName("meta")
-    val meta: Meta?,
+    val meta: @RawValue Meta?,
     @SerializedName("promoted_at")
     val promotedAt: String?, // 2024-04-11T09:20:10Z
     @SerializedName("public_domain")
     val publicDomain: Boolean?, // false
     @SerializedName("related_collections")
-    val relatedCollections: RelatedCollections?,
+    val relatedCollections: @RawValue RelatedCollections?,
     @SerializedName("slug")
     val slug: String?, // a-room-with-a-sign-that-says-youll-think-of-something-CSQEIr0eOZI
     @SerializedName("sponsorship")
-    val sponsorship: Any?, // null
+    val sponsorship: @RawValue Any?, // null
     @SerializedName("tags")
-    val tags: List<Tag?>?,
+    val tags: @RawValue List<Tag?>?,
     @SerializedName("tags_preview")
-    val tagsPreview: List<TagsPreview?>?,
+    val tagsPreview: @RawValue List<TagsPreview?>?,
     @SerializedName("topic_submissions")
-    val topicSubmissions: TopicSubmissions?,
+    val topicSubmissions: @RawValue TopicSubmissions?,
     @SerializedName("topics")
-    val topics: List<Any?>?,
+    val topics: @RawValue List<Any?>?,
     @SerializedName("updated_at")
     val updatedAt: String?, // 2024-04-12T08:41:01Z
     @SerializedName("urls")
-    val urls: Urls?,
+    val urls: @RawValue Urls?,
     @SerializedName("user")
-    val user: User?,
+    val user: @RawValue User?,
     @SerializedName("views")
     val views: Int?, // 458946
     @SerializedName("width")
     val width: Int? // 2701
-) {
+)  : Parcelable {
     data class AlternativeSlugs(
         @SerializedName("de")
         val de: String?, // ein-zimmer-mit-einem-schild-auf-dem-steht-dass-dir-etwas-einfallt-CSQEIr0eOZI

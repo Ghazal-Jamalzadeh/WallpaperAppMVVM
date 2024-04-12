@@ -85,6 +85,9 @@
         <argument
             android:name="id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_to_detailInfoFragment"
+            app:destination="@id/detailInfoFragment" />
 
     </fragment>
     <action
@@ -95,7 +98,16 @@
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
-
+    <!--  detail info   -->
+    <dialog
+        android:id="@+id/detailInfoFragment"
+        android:name="com.jmzd.ghazal.wallpaperappmvvm.ui.detail_info.DetailInfoFragment"
+        android:label="fragment_detail_info"
+        tools:layout="@layout/fragment_detail_info" >
+        <argument
+            android:name="data"
+            app:argType="com.jmzd.ghazal.wallpaperappmvvm.data.model.detail.ResponseDetail" />
+    </dialog>
 
 
 </navigation>
